@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "helper"
 
-module Google
-  module Cloud
-    module Spanner
-      VERSION = "1.4.0".freeze
-    end
+describe Google::Cloud::Spanner::ColumnValue do
+  it "creates an commit_timestamp" do
+    column_value = Google::Cloud::Spanner::ColumnValue.commit_timestamp
+
+    column_value.must_be_kind_of Google::Cloud::Spanner::ColumnValue
+    column_value.type.must_equal :commit_timestamp
+    column_value.to_column_value.must_equal "spanner.commit_timestamp()"
   end
 end
